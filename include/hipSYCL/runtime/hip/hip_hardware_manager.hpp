@@ -50,7 +50,11 @@ class RT_BACKEND_HIP_EXPORT hip_hardware_context : public hardware_context
 public:
   hip_hardware_context() = default;
   hip_hardware_context(int dev);
+  hip_hardware_context(const hip_hardware_context&) = delete;
   hip_hardware_context(hip_hardware_context&&) = default;
+
+  hip_hardware_context& operator=(const hip_hardware_context&) = delete;
+  hip_hardware_context& operator=(hip_hardware_context&&) = default;
 
   virtual bool is_cpu() const override;
   virtual bool is_gpu() const override;
@@ -88,6 +92,11 @@ class RT_BACKEND_HIP_EXPORT hip_hardware_manager : public backend_hardware_manag
 {
 public:
   hip_hardware_manager(hardware_platform hw_platform);
+  hip_hardware_manager(const hip_hardware_manager&) = delete;
+  hip_hardware_manager(hip_hardware_manager&&) = default;
+
+  hip_hardware_manager& operator=(const hip_hardware_manager&) = delete;
+  hip_hardware_manager& operator=(hip_hardware_manager&&) = default;
 
   virtual std::size_t get_num_devices() const override;
   virtual hardware_context *get_device(std::size_t index) override;

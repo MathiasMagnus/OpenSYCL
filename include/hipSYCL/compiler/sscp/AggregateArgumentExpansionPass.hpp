@@ -34,6 +34,8 @@
 #include <string>
 #include <unordered_map>
 
+#include <iostream>
+
 namespace hipsycl {
 namespace compiler {
 
@@ -41,6 +43,13 @@ namespace compiler {
 struct OriginalParamInfo {
   OriginalParamInfo(std::size_t Offset, std::size_t OriginalIndex)
   : OffsetInOriginalParam{Offset}, OriginalParamIndex{OriginalIndex} {}
+
+  OriginalParamInfo() = default;
+  OriginalParamInfo(const OriginalParamInfo& in) = default;
+  OriginalParamInfo(OriginalParamInfo&& in) = default;
+  ~OriginalParamInfo() = default;
+  OriginalParamInfo& operator=(const OriginalParamInfo& in) = default;
+  OriginalParamInfo& operator=(OriginalParamInfo&& in) = default;
 
   std::size_t OffsetInOriginalParam;
   std::size_t OriginalParamIndex;

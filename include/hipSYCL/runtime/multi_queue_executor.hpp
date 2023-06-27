@@ -131,6 +131,13 @@ public:
       const backend& b,
       queue_factory_function queue_factory);
 
+  multi_queue_executor() = delete;
+  multi_queue_executor(const multi_queue_executor&) = delete;
+  multi_queue_executor(multi_queue_executor&&) = default;
+
+  multi_queue_executor& operator=(const multi_queue_executor&) = delete;
+  multi_queue_executor& operator=(multi_queue_executor&&) = default;
+
   virtual ~multi_queue_executor() {}
 
   bool is_inorder_queue() const final override;

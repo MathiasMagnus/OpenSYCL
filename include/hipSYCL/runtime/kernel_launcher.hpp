@@ -117,6 +117,7 @@ public:
   {}
 
   kernel_launcher(const kernel_launcher &) = delete;
+  kernel_launcher(kernel_launcher&&) = delete;
 
   void invoke(backend_id id, rt::dag_node_ptr node) const {
     find_launcher(id)->invoke(node.get(), _kernel_config);
