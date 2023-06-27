@@ -159,7 +159,7 @@ if(WITH_ROCM_BACKEND)
 
   if(WITH_SSCP_COMPILER)
     target_compile_definitions(rt-backend-hip PRIVATE -DHIPSYCL_WITH_SSCP_COMPILER)
-    target_link_libraries(rt-backend-hip PRIVATE llvm-to-amdgpu)
+    target_link_libraries(rt-backend-hip PRIVATE llvm-to-amdgpu llvm-to-backend)
   endif()
 
   install(TARGETS rt-backend-hip

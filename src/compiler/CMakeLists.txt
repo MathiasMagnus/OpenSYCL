@@ -93,7 +93,12 @@ if(APPLE)
 elseif(WIN32)
   set(CLANG_LIBRARY_DIR ${LLVM_PREFIX_DIR}/lib/)
   target_link_directories(opensycl-clang PRIVATE ${CLANG_LIBRARY_DIR})
-  target_link_libraries(opensycl-clang clang LLVMSupport)
+  target_link_libraries(opensycl-clang PUBLIC
+    Version # GetFileVersionInfoSizeW
+    libclang clangAnalysis clangFrontend clangAST clangASTMatchers clangBasic clangDriver clangEdit clangLex clangParse clangSema clangSupport clangSerialization
+    LLVMCore LLVMFrontendOpenMP LLVMOption LLVMSupport LLVMWindowsDriver LLVMPasses
+    LLVMipo # SSCP
+  )
   set_target_properties(opensycl-clang PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS On)
 else()
   target_link_libraries(opensycl-clang -Wl,-znodelete)
