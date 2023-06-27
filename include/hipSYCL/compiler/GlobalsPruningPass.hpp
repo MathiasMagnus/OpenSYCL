@@ -59,7 +59,7 @@ struct OPENSYCL_CLANG_EXPORT GlobalsPruningPassLegacy : public llvm::ModulePass 
   bool runOnModule(llvm::Module &M) override;
 };
 
-#if !defined(_WIN32) && LLVM_VERSION_MAJOR >= 11
+#if LLVM_VERSION_MAJOR >= 11
 class OPENSYCL_CLANG_EXPORT GlobalsPruningPass : public llvm::PassInfoMixin<GlobalsPruningPass> {
 public:
   explicit GlobalsPruningPass() {}

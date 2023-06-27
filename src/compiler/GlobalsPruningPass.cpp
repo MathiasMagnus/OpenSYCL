@@ -42,7 +42,7 @@ bool hipsycl::compiler::GlobalsPruningPassLegacy::runOnModule(llvm::Module &M) {
   return true;
 }
 
-#if !defined(_WIN32) && LLVM_VERSION_MAJOR >= 11
+#if LLVM_VERSION_MAJOR >= 11
 llvm::PreservedAnalyses
 hipsycl::compiler::GlobalsPruningPass::run(llvm::Module &M,
                                            llvm::ModuleAnalysisManager &AM) {
