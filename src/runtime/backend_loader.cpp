@@ -33,6 +33,7 @@
 #include "hipSYCL/runtime/device_id.hpp"
 
 #include <cassert>
+#include <filesystem>
 
 #ifndef _WIN32
 #include <dlfcn.h>
@@ -70,13 +71,24 @@ void* load_library(const std::string &filename)
     }
   }
 #else
-  if(HMODULE handle = LoadLibraryA(filename.c_str())) {
+  std::filesystem::path filepath{filename};
+  HIPSYCL_DEBUG_INFO << "backend_loader: Adding path to DLL search path: "
+                        << filepath.make_preferred().parent_path().parent_path().string() << std::endl;
+  if (0 == AddDllDirectory(filepath.make_preferred().parent_path().parent_path().native().c_str())) {
+    HIPSYCL_DEBUG_WARNING << "backend_loader: Failed to add path to DLL search path: "
+                        << filepath.make_preferred().parent_path().parent_path().string() << " with: " << GetLastError() << std::endl;
+  }
+  if (0 == AddDllDirectory(L"C:\\Program Files\\AMD\\ROCm\\5.5\\bin")) {
+    HIPSYCL_DEBUG_WARNING << "backend_loader: Failed to add path to DLL search path: "
+                        << L"C:\\Program Files\\AMD\\ROCm\\5.5\\bin" << " with: " << GetLastError() << std::endl;
+  }
+  if(HMODULE handle = LoadLibraryExA(filepath.make_preferred().string().c_str(), nullptr, LOAD_LIBRARY_SEARCH_DEFAULT_DIRS | LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR)) {
     return static_cast<void*>(handle);
   } else {
     // too lazy to use FormatMessage bs right now, so look up the error at
     // https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes
     HIPSYCL_DEBUG_WARNING << "backend_loader: Could not load backend plugin: "
-                        << filename << " with: " << GetLastError() << std::endl;
+                        << filepath.make_preferred().string() << " with: " << GetLastError() << std::endl;
   }
 #endif
   return nullptr;
@@ -119,6 +131,8 @@ bool load_plugin(const std::string &filename, void *&handle_out,
 
       return true;
     } else {
+      HIPSYCL_DEBUG_WARNING << "backend_loader: Tried loading symbol from: "
+                        << filename << " with: " << GetLastError() << std::endl;
       close_plugin(handle);
       return false;
     }
