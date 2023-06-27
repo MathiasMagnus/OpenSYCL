@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_DEVICE_ID_HPP
 #define HIPSYCL_DEVICE_ID_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <functional>
 #include <cassert>
 #include <ostream>
@@ -57,7 +59,7 @@ enum class backend_id {
   omp
 };
 
-struct backend_descriptor
+struct HIPSYCL_RT_EXPORT backend_descriptor
 {
   backend_id id;
   hardware_platform hw_platform;
@@ -89,7 +91,7 @@ struct backend_descriptor
   }
 };
 
-class device_id
+class HIPSYCL_RT_EXPORT device_id
 {
 public:
   device_id() = default;
@@ -119,7 +121,7 @@ private:
   int _device_id;
 };
 
-class platform_id {
+class HIPSYCL_RT_EXPORT platform_id {
 public:
   platform_id(backend_id b, int platform)
       : _backend{b}, _platform_id{platform} {}

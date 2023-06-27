@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_HIP_INSTRUMENTATION_HPP
 #define HIPSYCL_HIP_INSTRUMENTATION_HPP
 
+#include <rt-backend-hip_export.h>
+
 #include "hip_event.hpp"
 #include "../generic/host_timestamped_event.hpp"
 #include "../generic/timestamp_delta_instrumentation.hpp"
@@ -38,7 +40,7 @@
 namespace hipsycl {
 namespace rt {
 
-class hip_event_time_delta {
+class RT_BACKEND_HIP_EXPORT hip_event_time_delta {
 public:
   profiler_clock::duration operator()(const dag_node_event& t0,
                                       const dag_node_event& t1) const;

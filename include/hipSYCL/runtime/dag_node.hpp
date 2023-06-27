@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_DAG_NODE_HPP
 #define HIPSYCL_DAG_NODE_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <memory>
 #include <atomic>
 
@@ -38,14 +40,14 @@
 namespace hipsycl {
 namespace rt {
 
-class operation;
-class backend_executor;
+class HIPSYCL_RT_EXPORT operation;
+class HIPSYCL_RT_EXPORT backend_executor;
 
-class dag_node;
-class runtime;
+class HIPSYCL_RT_EXPORT dag_node;
+class HIPSYCL_RT_EXPORT runtime;
 using dag_node_ptr = std::shared_ptr<dag_node>;
 
-class dag_node
+class HIPSYCL_RT_EXPORT dag_node
 {
 public:
   dag_node(const execution_hints& hints,

@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_DATA_HPP
 #define HIPSYCL_DATA_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <limits>
 #include <mutex>
 #include <vector>
@@ -45,7 +47,7 @@
 namespace hipsycl {
 namespace rt {
 
-class range_store
+class HIPSYCL_RT_EXPORT range_store
 {
 public:
   using rect = std::pair<id<3>, range<3>>;
@@ -213,7 +215,7 @@ private:
 };
 
 
-struct data_user
+struct HIPSYCL_RT_EXPORT data_user
 {
   std::weak_ptr<dag_node> user;
   sycl::access::mode mode;
@@ -223,7 +225,7 @@ struct data_user
 };
 
 
-class data_user_tracker
+class HIPSYCL_RT_EXPORT data_user_tracker
 {
 public:
   using user_iterator = std::vector<data_user>::iterator;

@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_HIP_EVENT_HPP
 #define HIPSYCL_HIP_EVENT_HPP
 
+#include <rt-backend-hip_export.h>
+
 #include "../inorder_queue_event.hpp"
 
 struct ihipEvent_t;
@@ -35,8 +37,8 @@ struct ihipEvent_t;
 namespace hipsycl {
 namespace rt {
 
-class hip_event_pool;
-class hip_node_event : public inorder_queue_event<ihipEvent_t*>
+class RT_BACKEND_HIP_EXPORT hip_event_pool;
+class RT_BACKEND_HIP_EXPORT hip_node_event : public inorder_queue_event<ihipEvent_t*>
 {
 public:
   using backend_event_type = ihipEvent_t*;

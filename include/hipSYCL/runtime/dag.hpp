@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_DAG_HPP
 #define HIPSYCL_DAG_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <vector>
 #include <memory>
 #include <functional>
@@ -44,7 +46,7 @@ namespace rt {
 /// by requirements into actual operations).
 ///
 /// Thread safety: None
-class dag
+class HIPSYCL_RT_EXPORT dag
 {
 public:
   void add_command_group(dag_node_ptr node);

@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_HINTS_HPP
 #define HIPSYCL_HINTS_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <algorithm>
 #include <memory>
 #include <vector>
@@ -38,11 +40,11 @@
 namespace hipsycl {
 namespace rt {
 
-class backend_executor;
-class dag_node;
+class HIPSYCL_RT_EXPORT backend_executor;
+class HIPSYCL_RT_EXPORT dag_node;
 using dag_node_ptr = std::shared_ptr<dag_node>;
 
-class operation;
+class HIPSYCL_RT_EXPORT operation;
 
 enum class execution_hint_type
 {
@@ -59,7 +61,7 @@ enum class execution_hint_type
   request_instrumentation_finish_timestamp
 };
 
-class execution_hint
+class HIPSYCL_RT_EXPORT execution_hint
 {
 public:
   execution_hint(execution_hint_type type);
@@ -83,7 +85,7 @@ execution_hint_ptr make_execution_hint(Args... args)
 
 namespace hints {
 
-class bind_to_device : public execution_hint
+class HIPSYCL_RT_EXPORT bind_to_device : public execution_hint
 {
 public:
   static constexpr execution_hint_type type = 
@@ -97,7 +99,7 @@ private:
 };
 
 
-class bind_to_device_group : public execution_hint
+class HIPSYCL_RT_EXPORT bind_to_device_group : public execution_hint
 {
 public:
   static constexpr execution_hint_type type = 
@@ -115,7 +117,7 @@ private:
 };
 
 
-class prefer_execution_lane : public execution_hint
+class HIPSYCL_RT_EXPORT prefer_execution_lane : public execution_hint
 {
 public:
   static constexpr execution_hint_type type =
@@ -132,7 +134,7 @@ private:
   std::size_t _lane_id;
 };
 
-class node_group : public execution_hint
+class HIPSYCL_RT_EXPORT node_group : public execution_hint
 {
 public:
   static constexpr execution_hint_type type =
@@ -148,7 +150,7 @@ private:
   std::size_t _group_id;
 };
 
-class coarse_grained_synchronization : public execution_hint
+class HIPSYCL_RT_EXPORT coarse_grained_synchronization : public execution_hint
 {
 public:
   static constexpr execution_hint_type type =
@@ -158,7 +160,7 @@ public:
   : execution_hint{execution_hint_type::coarse_grained_synchronization} {}
 };
 
-class prefer_executor : public execution_hint
+class HIPSYCL_RT_EXPORT prefer_executor : public execution_hint
 {
 public:
   static constexpr execution_hint_type type =
@@ -180,7 +182,7 @@ private:
   std::shared_ptr<backend_executor> _shared_executor;
 };
 
-class request_instrumentation_submission_timestamp : public execution_hint {
+class HIPSYCL_RT_EXPORT request_instrumentation_submission_timestamp : public execution_hint {
 public:
   static constexpr execution_hint_type type =
       execution_hint_type::request_instrumentation_submission_timestamp;
@@ -191,7 +193,7 @@ public:
 };
 
 
-class request_instrumentation_start_timestamp : public execution_hint {
+class HIPSYCL_RT_EXPORT request_instrumentation_start_timestamp : public execution_hint {
 public:
   static constexpr execution_hint_type type =
       execution_hint_type::request_instrumentation_start_timestamp;
@@ -201,7 +203,7 @@ public:
                            request_instrumentation_start_timestamp} {}
 };
 
-class request_instrumentation_finish_timestamp : public execution_hint {
+class HIPSYCL_RT_EXPORT request_instrumentation_finish_timestamp : public execution_hint {
 public:
   static constexpr execution_hint_type type =
       execution_hint_type::request_instrumentation_finish_timestamp;
@@ -215,7 +217,7 @@ public:
 
 
 
-class execution_hints
+class HIPSYCL_RT_EXPORT execution_hints
 {
 public:
   void add_hint(execution_hint_ptr hint);

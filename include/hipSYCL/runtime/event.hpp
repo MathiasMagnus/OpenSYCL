@@ -28,13 +28,15 @@
 #ifndef HIPSYCL_DAG_NODE_EVENT_HPP
 #define HIPSYCL_DAG_NODE_EVENT_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "device_id.hpp"
 #include "error.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-class dag_node_event
+class HIPSYCL_RT_EXPORT dag_node_event
 {
 public:
   virtual bool is_complete() const = 0;

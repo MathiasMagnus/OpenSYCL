@@ -1,3 +1,4 @@
+include(GenerateExportHeader)
 
 set(LLVM_TO_BACKEND_INCLUDE_DIRS 
   ../../../include
@@ -23,13 +24,31 @@ function(create_llvm_based_library)
   add_library(${target} SHARED
     ${sources})
 
-  target_include_directories(${target} PRIVATE
-    ${LLVM_TO_BACKEND_INCLUDE_DIRS})
+  generate_export_header(${target})
+
+  target_include_directories(${target} PUBLIC
+    ${LLVM_TO_BACKEND_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_BINARY_DIR})
   
   target_compile_definitions(${target} PRIVATE ${LLVM_DEFINITIONS} -DHIPSYCL_COMPILER_COMPONENT)
-  llvm_config(${target} USE_SHARED core support irreader passes)
+  if(WIN32)
+    llvm_config(${target} core support irreader passes)
+    target_link_directories(${target} PUBLIC ${CLANG_LIBRARY_DIR})
+    target_link_libraries(${target} PUBLIC
+      Version # GetFileVersionInfoSizeW
+      libclang clangAnalysis clangFrontend clangAST clangASTMatchers clangBasic clangDriver clangEdit clangLex clangParse clangSema clangSupport clangSerialization
+      LLVMCore LLVMFrontendOpenMP LLVMOption LLVMSupport LLVMWindowsDriver
+      LLVMPasses)
 
-  install(TARGETS ${target} DESTINATION lib/hipSYCL/llvm-to-backend)
+    install(TARGETS ${target}
+      LIBRARY DESTINATION lib
+      RUNTIME DESTINATION bin
+      ARCHIVE DESTINATION lib)
+  else()
+    llvm_config(${target} USE_SHARED core support irreader passes)
+
+    install(TARGETS ${target} DESTINATION lib/hipSYCL/llvm-to-backend)
+  endif()
 endfunction()
 
 function(create_llvm_to_backend_library)
@@ -48,6 +67,11 @@ function(create_llvm_to_backend_library)
 
   create_llvm_based_library(TARGET ${target} SOURCES ${sources})
   target_link_libraries(${target} PUBLIC llvm-to-backend opensycl-common)
+
+  install(TARGETS llvm-to-${backend_name}
+        LIBRARY DESTINATION lib/hipSYCL
+        RUNTIME DESTINATION bin/hipSYCL
+        ARCHIVE DESTINATION lib/hipSYCL)
 endfunction()
 
 function(create_llvm_to_backend_tool)
@@ -67,7 +91,8 @@ function(create_llvm_to_backend_tool)
   add_executable(${target}-tool ${sources})
 
   target_include_directories(${target}-tool PRIVATE
-    ${LLVM_TO_BACKEND_INCLUDE_DIRS})
+    ${LLVM_TO_BACKEND_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_BINARY_DIR})
   
   target_compile_definitions(${target}-tool PRIVATE ${LLVM_DEFINITIONS} -DHIPSYCL_TOOL_COMPONENT)
   target_link_libraries(${target}-tool PRIVATE ${target})
@@ -156,12 +181,12 @@ if(WITH_SSCP_COMPILER)
     target_compile_definitions(llvm-to-amdgpu PRIVATE
       -DHIPSYCL_ROCM_PATH="${ROCM_PATH}")
 
-    find_library(HIPRTC_LIBRARY hiprtc HINTS ${ROCM_PATH}/lib)
-    if(HIPRTC_LIBRARY)
+    find_package(hiprtc CONFIG)
+    if(TARGET hiprtc::hiprtc)
+      get_target_property(HIPRTC_LIBRARY hiprtc::hiprtc IMPORTED_LOCATION_RELEASE)
       message(STATUS "Found hipRTC: ${HIPRTC_LIBRARY}")
       target_compile_definitions(llvm-to-amdgpu PRIVATE -DHIPSYCL_SSCP_AMDGPU_USE_HIPRTC)
-      target_include_directories(llvm-to-amdgpu PRIVATE ${ROCM_PATH}/include)
-      target_link_libraries(llvm-to-amdgpu PRIVATE ${HIPRTC_LIBRARY})
+      target_link_libraries(llvm-to-amdgpu PRIVATE hiprtc::hiprtc)
     endif()
 
     if(HIPSYCL_SSCP_AMDGPU_USE_ROCM_CLANG)

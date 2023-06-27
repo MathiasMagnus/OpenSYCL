@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_RT_SETTINGS_HPP
 #define HIPSYCL_RT_SETTINGS_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "hipSYCL/runtime/device_id.hpp"
 
 #include <ios>
@@ -44,9 +46,9 @@ namespace rt {
 enum class scheduler_type { direct, unbound };
 enum class default_selector_behavior { strict, multigpu, system };
 
-std::istream &operator>>(std::istream &istr, scheduler_type &out);
-std::istream &operator>>(std::istream &istr, std::vector<rt::backend_id> &out);
-std::istream &operator>>(std::istream &istr, default_selector_behavior& out);
+HIPSYCL_RT_EXPORT std::istream &operator>>(std::istream &istr, scheduler_type &out);
+HIPSYCL_RT_EXPORT std::istream &operator>>(std::istream &istr, std::vector<rt::backend_id> &out);
+HIPSYCL_RT_EXPORT std::istream &operator>>(std::istream &istr, default_selector_behavior& out);
 
 enum class setting {
   debug_level,
@@ -88,7 +90,7 @@ HIPSYCL_RT_MAKE_SETTING_TRAIT(setting::max_cached_nodes, "rt_max_cached_nodes", 
 HIPSYCL_RT_MAKE_SETTING_TRAIT(setting::sscp_failed_ir_dump_directory,
                               "sscp_failed_ir_dump_directory", std::string)
 
-class settings
+class HIPSYCL_RT_EXPORT settings
 {
 public:
 

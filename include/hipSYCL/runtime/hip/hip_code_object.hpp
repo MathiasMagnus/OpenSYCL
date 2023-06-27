@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_HIP_CODE_OBJECT_HPP
 #define HIPSYCL_HIP_CODE_OBJECT_HPP
 
+#include <rt-backend-hip_export.h>
+
 #include <vector>
 #include <string>
 
@@ -42,7 +44,7 @@ struct ihipModule_t;
 namespace hipsycl {
 namespace rt {
 
-class hip_executable_object : public code_object {
+class RT_BACKEND_HIP_EXPORT hip_executable_object : public code_object {
 public:
   virtual ~hip_executable_object() {}
   virtual ihipModule_t* get_module() const = 0;
@@ -50,7 +52,7 @@ public:
   virtual int get_device() const = 0;
 };
 
-class hip_multipass_executable_object : public hip_executable_object {
+class RT_BACKEND_HIP_EXPORT hip_multipass_executable_object : public hip_executable_object {
 public:
   virtual ~hip_multipass_executable_object();
   hip_multipass_executable_object(hcf_object_id origin, const std::string &target,
@@ -82,7 +84,7 @@ private:
   ihipModule_t* _module;
 };
 
-class hip_sscp_executable_object : public hip_executable_object {
+class RT_BACKEND_HIP_EXPORT hip_sscp_executable_object : public hip_executable_object {
 public:
   virtual ~hip_sscp_executable_object();
   hip_sscp_executable_object(const std::string &hip_fat_binary,

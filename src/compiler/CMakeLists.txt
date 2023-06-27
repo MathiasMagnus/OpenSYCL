@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 project(opensycl-clang)
 
+include(GenerateExportHeader)
+include(GNUInstallDirs)
+
 get_filename_component(CLANG_BINARY_PREFIX ${CLANG_EXECUTABLE_PATH} DIRECTORY)
 
 if(NOT HIPSYCL_DEBUG_LEVEL)
@@ -55,11 +58,15 @@ add_library(opensycl-clang SHARED
   ${SSCP_COMPILER}
 )
 
+generate_export_header(opensycl-clang)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/opensycl-clang_export.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
 target_include_directories(opensycl-clang PRIVATE
   ../../include
   ${LLVM_INCLUDE_DIRS}
   ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_BINARY_DIR}/include)
+  ${CMAKE_BINARY_DIR}/include
+  ${CMAKE_CURRENT_BINARY_DIR})
 
 target_compile_definitions(opensycl-clang PRIVATE
   ${LLVM_DEFINITIONS} -DHIPSYCL_COMPILER_COMPONENT)

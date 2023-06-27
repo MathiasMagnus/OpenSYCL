@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_INSTRUMENTATION_HPP
 #define HIPSYCL_INSTRUMENTATION_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <cassert>
 #include <cstdint>
 #include <chrono>
@@ -42,7 +44,7 @@ namespace hipsycl {
 namespace rt {
 
 // SYCL defines timestamps as uint64_t with nanosecond resolution
-class profiler_clock {
+class HIPSYCL_RT_EXPORT profiler_clock {
 public:
   using rep = uint64_t;
   using period = std::nano;
@@ -67,7 +69,7 @@ public:
   }
 };
 
-class instrumentation {
+class HIPSYCL_RT_EXPORT instrumentation {
 public:
   /// Waits until an instrumentation has its result available
   /// This does not need to be called manually, as the instrumentation_set
@@ -80,7 +82,7 @@ template<typename T>
 inline constexpr bool is_instrumentation_v
     = std::is_convertible_v<std::remove_cv_t<T> *, instrumentation *>;
 
-class instrumentation_set {
+class HIPSYCL_RT_EXPORT instrumentation_set {
 public:
   /// Wait for the given instrumentation to make results available. 
   /// Returns nullptr if the given instrumentation was not set up.
@@ -133,19 +135,19 @@ private:
 
 namespace instrumentations {
 
-class submission_timestamp : public instrumentation {
+class HIPSYCL_RT_EXPORT submission_timestamp : public instrumentation {
 public:
   virtual profiler_clock::time_point get_time_point() const = 0;
   virtual ~submission_timestamp() = default;
 };
 
-class execution_start_timestamp : public instrumentation {
+class HIPSYCL_RT_EXPORT execution_start_timestamp : public instrumentation {
 public:
   virtual profiler_clock::time_point get_time_point() const = 0;
   virtual ~execution_start_timestamp() = default;
 };
 
-class execution_finish_timestamp : public instrumentation {
+class HIPSYCL_RT_EXPORT execution_finish_timestamp : public instrumentation {
 public:
   virtual profiler_clock::time_point get_time_point() const = 0;
   virtual ~execution_finish_timestamp() = default;
@@ -153,7 +155,7 @@ public:
 
 }
 
-class simple_submission_timestamp : public instrumentations::submission_timestamp {
+class HIPSYCL_RT_EXPORT simple_submission_timestamp : public instrumentations::submission_timestamp {
 public:
   simple_submission_timestamp(profiler_clock::time_point submission_time)
   : _time{submission_time} {}

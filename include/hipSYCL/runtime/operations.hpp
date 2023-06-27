@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_OPERATIONS_HPP
 #define HIPSYCL_OPERATIONS_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "hipSYCL/glue/kernel_names.hpp"
 #include "hipSYCL/sycl/access.hpp"
 #include "hipSYCL/common/debug.hpp"
@@ -51,22 +53,22 @@
 namespace hipsycl {
 namespace rt {
 
-class inorder_queue;
+class HIPSYCL_RT_EXPORT inorder_queue;
 
 template<class T> class data_region;
 using buffer_data_region = data_region<void *>;
 
-class runtime;
-class backend_executor;
-class dag_node;
+class HIPSYCL_RT_EXPORT runtime;
+class HIPSYCL_RT_EXPORT backend_executor;
+class HIPSYCL_RT_EXPORT dag_node;
 using dag_node_ptr = std::shared_ptr<dag_node>;
 
-class kernel_operation;
-class memcpy_operation;
-class prefetch_operation;
-class memset_operation;
+class HIPSYCL_RT_EXPORT kernel_operation;
+class HIPSYCL_RT_EXPORT memcpy_operation;
+class HIPSYCL_RT_EXPORT prefetch_operation;
+class HIPSYCL_RT_EXPORT memset_operation;
 
-class operation_dispatcher
+class HIPSYCL_RT_EXPORT operation_dispatcher
 {
 public:
   virtual result dispatch_kernel(kernel_operation* op, dag_node_ptr node) = 0;
@@ -76,7 +78,7 @@ public:
   virtual ~operation_dispatcher(){}
 };
 
-class operation
+class HIPSYCL_RT_EXPORT operation
 {
 public:
   operation() = default;
@@ -101,7 +103,7 @@ private:
 };
 
 
-class requirement : public operation
+class HIPSYCL_RT_EXPORT requirement : public operation
 {
 public:
   virtual bool is_memory_requirement() const = 0;
@@ -117,7 +119,7 @@ public:
   virtual ~requirement(){}
 };
 
-class memory_requirement : public requirement
+class HIPSYCL_RT_EXPORT memory_requirement : public requirement
 {
 public:
   virtual ~memory_requirement() {}
@@ -144,7 +146,7 @@ public:
   { return !is_image_requirement(); }
 };
 
-class buffer_memory_requirement : public memory_requirement
+class HIPSYCL_RT_EXPORT buffer_memory_requirement : public memory_requirement
 {
 public:
   template <int Dim>
@@ -321,10 +323,10 @@ private:
 };
 
 
-class requirements_list;
+class HIPSYCL_RT_EXPORT requirements_list;
 
 
-class kernel_operation : public operation
+class HIPSYCL_RT_EXPORT kernel_operation : public operation
 {
 public:
   kernel_operation(const std::string& kernel_name,
@@ -388,7 +390,7 @@ private:
 // representations of memory locations. This is because,
 // due to lazy allocation, we may not have allocated
 // the target memcpy location, so we cannot know it in general.
-class memory_location
+class HIPSYCL_RT_EXPORT memory_location
 {
 public:
   memory_location(device_id d, id<3> access_offset,
@@ -431,7 +433,7 @@ private:
 };
 
 /// An explicit memory operation
-class memcpy_operation : public operation
+class HIPSYCL_RT_EXPORT memcpy_operation : public operation
 {
 public:
   memcpy_operation(const memory_location &source, const memory_location &dest,
@@ -471,7 +473,7 @@ private:
 };
 
 /// USM prefetch
-class prefetch_operation : public operation {
+class HIPSYCL_RT_EXPORT prefetch_operation : public operation {
 public:
   prefetch_operation(const void *ptr, std::size_t num_bytes, device_id target)
       : _ptr{ptr}, _num_bytes{num_bytes}, _target{target} {}
@@ -493,7 +495,7 @@ private:
 };
 
 /// USM memset
-class memset_operation : public operation {
+class HIPSYCL_RT_EXPORT memset_operation : public operation {
 public:
   memset_operation(void *ptr, unsigned char pattern, std::size_t num_bytes)
       : _ptr{ptr}, _pattern{pattern}, _num_bytes{num_bytes} {}
@@ -515,7 +517,7 @@ private:
 };
 
 
-class backend_synchronization_operation
+class HIPSYCL_RT_EXPORT backend_synchronization_operation
 {
 public:
   virtual ~backend_synchronization_operation(){}
@@ -526,7 +528,7 @@ public:
   virtual bool is_wait_operation() const { return false; }
 };
 
-class event_before_node : public backend_synchronization_operation
+class HIPSYCL_RT_EXPORT event_before_node : public backend_synchronization_operation
 {
 public:
   virtual ~event_before_node(){}
@@ -543,7 +545,7 @@ private:
   std::shared_ptr<dag_node_event> _evt;
 };
 
-class event_after_node : public backend_synchronization_operation
+class HIPSYCL_RT_EXPORT event_after_node : public backend_synchronization_operation
 {
 public:
   virtual ~event_after_node(){}
@@ -565,7 +567,7 @@ enum class wait_target {
   external_backend
 };
 
-class wait_operation : public backend_synchronization_operation
+class HIPSYCL_RT_EXPORT wait_operation : public backend_synchronization_operation
 {
 public:
   wait_operation(dag_node_ptr target_node)
@@ -584,7 +586,7 @@ protected:
   dag_node_ptr _target_node;
 };
 
-class wait_for_node_on_same_lane : public wait_operation
+class HIPSYCL_RT_EXPORT wait_for_node_on_same_lane : public wait_operation
 {
 public:
   wait_for_node_on_same_lane(dag_node_ptr node)
@@ -594,7 +596,7 @@ public:
   { return wait_target::same_lane; }
 };
 
-class wait_for_node_on_same_backend : public wait_operation
+class HIPSYCL_RT_EXPORT wait_for_node_on_same_backend : public wait_operation
 {
 public:
   wait_for_node_on_same_backend(dag_node_ptr node)
@@ -604,7 +606,7 @@ public:
   { return wait_target::same_backend; }
 };
 
-class wait_for_external_node : public wait_operation
+class HIPSYCL_RT_EXPORT wait_for_external_node : public wait_operation
 {
 public:
   wait_for_external_node(dag_node_ptr node)
@@ -624,7 +626,7 @@ std::unique_ptr<operation> make_operation(Args... args)
 
 
 
-class requirements_list
+class HIPSYCL_RT_EXPORT requirements_list
 {
 public:
   requirements_list(runtime* rt)

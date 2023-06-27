@@ -29,13 +29,15 @@
 #ifndef HIPSYCL_INORDER_EXECUTOR_HPP
 #define HIPSYCL_INORDER_EXECUTOR_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "executor.hpp"
 #include "inorder_queue.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-class inorder_executor : public backend_executor
+class HIPSYCL_RT_EXPORT inorder_executor : public backend_executor
 {
 public:
   inorder_executor(std::unique_ptr<inorder_queue> q);

@@ -28,12 +28,14 @@
 #ifndef HIPSYCL_OMP_ALLOCATOR_HPP
 #define HIPSYCL_OMP_ALLOCATOR_HPP
 
+#include <rt-backend-omp_export.h>
+
 #include "../allocator.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-class omp_allocator : public backend_allocator 
+class RT_BACKEND_OMP_EXPORT omp_allocator : public backend_allocator 
 {
 public:
   omp_allocator(const device_id &my_device);

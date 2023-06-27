@@ -28,12 +28,14 @@
 #ifndef HIPSYCL_INORDER_QUEUE_EVENT_HPP
 #define HIPSYCL_INORDER_QUEUE_EVENT_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "event.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-class inorder_queue;
+class HIPSYCL_RT_EXPORT inorder_queue;
 
 template<class FineGrainedBackendEventT>
 class inorder_queue_event : public dag_node_event {

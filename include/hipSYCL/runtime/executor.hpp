@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_EXECUTOR_HPP
 #define HIPSYCL_EXECUTOR_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "dag_node.hpp"
 #include "device_id.hpp"
 #include "operations.hpp"
@@ -38,13 +40,13 @@ namespace hipsycl {
 namespace rt {
 
 
-struct backend_execution_lane_range
+struct HIPSYCL_RT_EXPORT backend_execution_lane_range
 {
   std::size_t begin;
   std::size_t num_lanes;
 };
 
-class backend_executor
+class HIPSYCL_RT_EXPORT backend_executor
 {
 public:
 

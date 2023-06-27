@@ -1,7 +1,7 @@
 /*
  * This file is part of hipSYCL, a SYCL implementation based on CUDA/HIP
  *
- * Copyright (c) 2022 Aksel Alpay
+ * Copyright (c) 2019 Aksel Alpay
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,36 +25,4 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef HIPSYCL_HIP_EVENT_POOL_HPP
-#define HIPSYCL_HIP_EVENT_POOL_HPP
-
-#include <rt-backend-hip_export.h>
-
-#include "../event_pool.hpp"
-#include "hip_event.hpp"
-
-
-
-namespace hipsycl {
-namespace rt {
-
-class RT_BACKEND_HIP_EXPORT hip_event_factory {
-public:
-  using event_type = ihipEvent_t*;
-  hip_event_factory(int device_id);
-
-  result create(event_type&);
-  result destroy(event_type);
-private:
-  int _device_id;
-};
-
-class RT_BACKEND_HIP_EXPORT hip_event_pool : public event_pool<hip_event_factory> {
-public:
-  hip_event_pool(int device_id);
-};
-
-}
-}
-
-#endif
+#include "hipSYCL/runtime/device_list.hpp"

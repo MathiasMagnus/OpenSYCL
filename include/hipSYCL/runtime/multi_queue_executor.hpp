@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_MULTI_QUEUE_EXECUTOR_HPP
 #define HIPSYCL_MULTI_QUEUE_EXECUTOR_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <cmath>
 #include <cassert>
 #include <functional>
@@ -43,7 +45,7 @@ namespace hipsycl {
 namespace rt {
 
 
-class moving_statistics {
+class HIPSYCL_RT_EXPORT moving_statistics {
 public:
   moving_statistics() = default;
   moving_statistics(std::size_t max_entries, std::size_t num_bins,
@@ -119,7 +121,7 @@ private:
 
 /// An executor that submits tasks by serializing them onto 
 /// to multiple inorder queues (e.g. CUDA streams)
-class multi_queue_executor : public backend_executor
+class HIPSYCL_RT_EXPORT multi_queue_executor : public backend_executor
 {
 public:
   using queue_factory_function =

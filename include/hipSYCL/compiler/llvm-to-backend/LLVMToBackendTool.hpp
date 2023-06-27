@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_LLVM_TO_BACKEND_TOOL_HPP
 #define HIPSYCL_LLVM_TO_BACKEND_TOOL_HPP
 
+#include <llvm-to-backend_export.h>
+
 #include <ios>
 #include <iostream>
 #include <memory>

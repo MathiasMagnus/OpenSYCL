@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_INORDER_QUEUE_HPP
 #define HIPSYCL_INORDER_QUEUE_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <memory>
 #include <string>
 
@@ -40,7 +42,7 @@
 namespace hipsycl {
 namespace rt {
 
-class inorder_queue_status {
+class HIPSYCL_RT_EXPORT inorder_queue_status {
 public:
   inorder_queue_status() = default;
   inorder_queue_status(bool is_complete)
@@ -54,7 +56,7 @@ private:
   bool _is_complete;
 };
 
-class inorder_queue
+class HIPSYCL_RT_EXPORT inorder_queue
 {
 public:
 

@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_APPLICATION_HPP
 #define HIPSYCL_APPLICATION_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <memory>
 
 #include "backend.hpp"
@@ -37,11 +39,11 @@
 namespace hipsycl {
 namespace rt {
 
-class dag_manager;
-class runtime;
-class async_error_list;
+class HIPSYCL_RT_EXPORT dag_manager;
+class HIPSYCL_RT_EXPORT runtime;
+class HIPSYCL_RT_EXPORT async_error_list;
 
-class application
+class HIPSYCL_RT_EXPORT application
 {
 public:
   static settings& get_settings();
@@ -53,7 +55,7 @@ public:
   application() = delete;
 };
 
-class persistent_runtime {
+class HIPSYCL_RT_EXPORT persistent_runtime {
 public:
   persistent_runtime() : _rt{nullptr} {
     if(application::get_settings().get<setting::persistent_runtime>()) {
@@ -64,7 +66,7 @@ private:
   std::shared_ptr<runtime> _rt;
 };
 
-class runtime_keep_alive_token {
+class HIPSYCL_RT_EXPORT runtime_keep_alive_token {
 public:
   runtime_keep_alive_token();
 

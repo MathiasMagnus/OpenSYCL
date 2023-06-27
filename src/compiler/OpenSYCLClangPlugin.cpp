@@ -26,6 +26,8 @@
  */
 #include "hipSYCL/common/config.hpp"
 
+#include <opensycl-clang_export.h>
+
 #include "hipSYCL/compiler/FrontendPlugin.hpp"
 #include "hipSYCL/compiler/GlobalsPruningPass.hpp"
 #include "hipSYCL/compiler/cbs/PipelineBuilder.hpp"

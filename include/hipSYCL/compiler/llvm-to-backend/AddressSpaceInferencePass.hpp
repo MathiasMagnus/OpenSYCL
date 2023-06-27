@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_SSCP_ADDRESS_SPACE_INFERENCE_PASS_HPP
 #define HIPSYCL_SSCP_ADDRESS_SPACE_INFERENCE_PASS_HPP
 
+#include <llvm-to-backend_export.h>
+
 #include <llvm/IR/PassManager.h>
 #include "Utils.hpp"
 #include "AddressSpaceMap.hpp"
@@ -35,7 +37,7 @@
 namespace hipsycl {
 namespace compiler {
 
-class AddressSpaceInferencePass : public llvm::PassInfoMixin<AddressSpaceInferencePass> {
+class LLVM_TO_BACKEND_EXPORT AddressSpaceInferencePass : public llvm::PassInfoMixin<AddressSpaceInferencePass> {
 public:
   AddressSpaceInferencePass(const AddressSpaceMap& Map);
   llvm::PreservedAnalyses run(llvm::Module &M,

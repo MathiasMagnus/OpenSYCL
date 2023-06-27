@@ -29,6 +29,8 @@
 #ifndef HIPSYCL_HIP_HARDWARE_MANAGER_HPP
 #define HIPSYCL_HIP_HARDWARE_MANAGER_HPP
 
+#include <rt-backend-hip_export.h>
+
 #include <vector>
 #include <memory>
 
@@ -40,10 +42,10 @@ struct hipDeviceProp_t;
 namespace hipsycl {
 namespace rt {
 
-class hip_allocator;
-class hip_event_pool;
+class RT_BACKEND_HIP_EXPORT hip_allocator;
+class RT_BACKEND_HIP_EXPORT hip_event_pool;
 
-class hip_hardware_context : public hardware_context
+class RT_BACKEND_HIP_EXPORT hip_hardware_context : public hardware_context
 {
 public:
   hip_hardware_context() = default;
@@ -82,7 +84,7 @@ private:
   int _dev;
 };
 
-class hip_hardware_manager : public backend_hardware_manager
+class RT_BACKEND_HIP_EXPORT hip_hardware_manager : public backend_hardware_manager
 {
 public:
   hip_hardware_manager(hardware_platform hw_platform);

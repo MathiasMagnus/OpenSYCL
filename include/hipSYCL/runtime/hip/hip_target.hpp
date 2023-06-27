@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_HIP_TARGET_HPP
 #define HIPSYCL_HIP_TARGET_HPP
 
+#include <rt-backend-hip_export.h>
+
 #if !defined(HIPSYCL_RT_HIP_TARGET_CUDA) &&                                    \
     !defined(HIPSYCL_RT_HIP_TARGET_ROCM) &&                                    \
     !defined(HIPSYCL_RT_HIP_TARGET_HIPCPU)

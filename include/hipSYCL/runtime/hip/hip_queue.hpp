@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_HIP_QUEUE_HPP
 #define HIPSYCL_HIP_QUEUE_HPP
 
+#include <rt-backend-hip_export.h>
+
 #include "../executor.hpp"
 #include "../inorder_queue.hpp"
 #include "../generic/host_timestamped_event.hpp"
@@ -41,10 +43,10 @@ struct ihipStream_t;
 namespace hipsycl {
 namespace rt {
 
-class hip_queue;
-class hip_backend;
+class RT_BACKEND_HIP_EXPORT hip_queue;
+class RT_BACKEND_HIP_EXPORT hip_backend;
 
-class hip_multipass_code_object_invoker : public multipass_code_object_invoker {
+class RT_BACKEND_HIP_EXPORT hip_multipass_code_object_invoker : public multipass_code_object_invoker {
 public:
   hip_multipass_code_object_invoker(hip_queue* q);
 
@@ -62,7 +64,7 @@ private:
 };
 
 
-class hip_sscp_code_object_invoker : public sscp_code_object_invoker {
+class RT_BACKEND_HIP_EXPORT hip_sscp_code_object_invoker : public sscp_code_object_invoker {
 public:
   hip_sscp_code_object_invoker(hip_queue* q)
   : _queue{q} {}
@@ -81,7 +83,7 @@ private:
   hip_queue* _queue;
 };
 
-class hip_queue : public inorder_queue
+class RT_BACKEND_HIP_EXPORT hip_queue : public inorder_queue
 {
 public:
   hip_queue(hip_backend* be, device_id dev, int priority = 0);

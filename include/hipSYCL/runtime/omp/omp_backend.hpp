@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_OMP_BACKEND_HPP
 #define HIPSYCL_OMP_BACKEND_HPP
 
+#include <rt-backend-omp_export.h>
+
 #include "../backend.hpp"
 #include "../multi_queue_executor.hpp"
 #include "omp_allocator.hpp"
@@ -37,7 +39,7 @@ namespace hipsycl {
 namespace rt {
 
 
-class omp_backend : public backend
+class RT_BACKEND_OMP_EXPORT omp_backend : public backend
 {
 public:
   omp_backend();

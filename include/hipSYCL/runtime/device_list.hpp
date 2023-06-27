@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_RT_DEVICE_LIST_HPP
 #define HIPSYCL_RT_DEVICE_LIST_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <algorithm>
 #include <vector>
 
@@ -37,7 +39,7 @@
 namespace hipsycl {
 namespace rt {
 
-class unique_device_list {
+class HIPSYCL_RT_EXPORT unique_device_list {
 public:
   unique_device_list(runtime* rt)
   : _rt{rt} {}

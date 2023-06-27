@@ -29,15 +29,17 @@
 #ifndef HIPSYCL_DAG_UNBOUND_SCHEDULER_HPP
 #define HIPSYCL_DAG_UNBOUND_SCHEDULER_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "dag_node.hpp"
 #include "dag_direct_scheduler.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-class runtime;
+class HIPSYCL_RT_EXPORT runtime;
 
-class dag_unbound_scheduler {
+class HIPSYCL_RT_EXPORT dag_unbound_scheduler {
 public:
   dag_unbound_scheduler(runtime* rt);
 

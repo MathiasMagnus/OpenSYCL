@@ -25,6 +25,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <llvm-to-backend_export.h>
+#include <llvm-to-amdgpu_export.h>
+
 #include "hipSYCL/common/hcf_container.hpp"
 #include "hipSYCL/compiler/llvm-to-backend/LLVMToBackend.hpp"
 #include "hipSYCL/compiler/llvm-to-backend/LLVMToBackendTool.hpp"

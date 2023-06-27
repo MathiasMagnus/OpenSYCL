@@ -25,6 +25,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <rt-backend-hip_export.h>
+
 #include "hipSYCL/runtime/hip/hip_target.hpp"
 #include "hipSYCL/common/hcf_container.hpp"
 #include "hipSYCL/runtime/hip/hip_hardware_manager.hpp"

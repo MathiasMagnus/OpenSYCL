@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_IR_HPP
 #define HIPSYCL_IR_HPP
 
+#include <opensycl-clang_export.h>
+
 #include "llvm/Analysis/CallGraph.h"
 #include "llvm/IR/Constants.h"
 #include "llvm/IR/Function.h"
@@ -47,7 +49,7 @@
 namespace hipsycl {
 namespace compiler {
 
-struct GlobalsPruningPassLegacy : public llvm::ModulePass {
+struct OPENSYCL_CLANG_EXPORT GlobalsPruningPassLegacy : public llvm::ModulePass {
   static char ID;
 
   GlobalsPruningPassLegacy() : llvm::ModulePass(ID) {}
@@ -58,7 +60,7 @@ struct GlobalsPruningPassLegacy : public llvm::ModulePass {
 };
 
 #if !defined(_WIN32) && LLVM_VERSION_MAJOR >= 11
-class GlobalsPruningPass : public llvm::PassInfoMixin<GlobalsPruningPass> {
+class OPENSYCL_CLANG_EXPORT GlobalsPruningPass : public llvm::PassInfoMixin<GlobalsPruningPass> {
 public:
   explicit GlobalsPruningPass() {}
 

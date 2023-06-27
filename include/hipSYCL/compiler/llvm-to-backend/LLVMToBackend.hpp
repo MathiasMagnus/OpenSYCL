@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_LLVM_TO_BACKEND_HPP
 #define HIPSYCL_LLVM_TO_BACKEND_HPP
 
+#include <llvm-to-backend_export.h>
+
 
 // Note: This file should not include any LLVM headers or include
 // dependencies that rely on LLVM headers in order to not spill
@@ -51,15 +53,15 @@ class Function;
 namespace hipsycl {
 namespace compiler {
 
-struct PassHandler;
+struct LLVM_TO_BACKEND_EXPORT PassHandler;
 
-struct TranslationHints {
+struct LLVM_TO_BACKEND_EXPORT TranslationHints {
   std::optional<std::size_t> RequestedLocalMemSize;
   std::optional<std::size_t> SubgroupSize;
   std::optional<rt::range<3>> WorkGroupSize;
 };
 
-class LLVMToBackendTranslator {
+class LLVM_TO_BACKEND_EXPORT LLVMToBackendTranslator {
 public:
   LLVMToBackendTranslator(int S2IRConstantCurrentBackendId,
     const std::vector<std::string>& OutliningEntrypoints);

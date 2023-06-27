@@ -28,13 +28,15 @@
 #ifndef HIPSYCL_RUNTIME_ALLOCATOR_HPP
 #define HIPSYCL_RUNTIME_ALLOCATOR_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "device_id.hpp"
 #include "error.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-struct pointer_info {
+struct HIPSYCL_RT_EXPORT pointer_info {
   // Device on which memory is allocator. For shared allocations
   // this might not have reliable semantics
   rt::device_id dev;
@@ -47,7 +49,7 @@ struct pointer_info {
   bool is_from_host_backend;
 };
 
-class backend_allocator
+class HIPSYCL_RT_EXPORT backend_allocator
 {
 public:
   virtual void *allocate(size_t min_alignment, size_t size_bytes) = 0;

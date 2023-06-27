@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_LLVM_TO_AMDGPU_FACTORY_HPP
 #define HIPSYCL_LLVM_TO_AMDGPU_FACTORY_HPP
 
+#include <llvm-to-amdgpu_export.h>
+
 #include <memory>
 #include <vector>
 #include <string>
@@ -36,7 +38,7 @@
 namespace hipsycl {
 namespace compiler {
 
-std::unique_ptr<LLVMToBackendTranslator>
+LLVM_TO_AMDGPU_EXPORT std::unique_ptr<LLVMToBackendTranslator>
 createLLVMToAmdgpuTranslator(const std::vector<std::string> &KernelNames);
 
 }

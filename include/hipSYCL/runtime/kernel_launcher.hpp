@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_KERNEL_LAUNCHER_HPP
 #define HIPSYCL_KERNEL_LAUNCHER_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <limits>
 #include <optional>
 #include <vector>
@@ -45,8 +47,8 @@
 namespace hipsycl {
 namespace rt {
 
-class multipass_code_object_invoker;
-class sscp_code_object_invoker;
+class HIPSYCL_RT_EXPORT multipass_code_object_invoker;
+class HIPSYCL_RT_EXPORT sscp_code_object_invoker;
 
 enum class kernel_type {
   single_task,
@@ -57,7 +59,7 @@ enum class kernel_type {
   custom
 };
 
-class backend_kernel_launch_capabilities {
+class HIPSYCL_RT_EXPORT backend_kernel_launch_capabilities {
 public:
   void provide_multipass_invoker(multipass_code_object_invoker* invoker) {
     _multipass_invoker = invoker;
@@ -83,7 +85,7 @@ private:
   sscp_code_object_invoker* _sscp_invoker = nullptr;
 };
 
-class backend_kernel_launcher
+class HIPSYCL_RT_EXPORT backend_kernel_launcher
 {
 public:
   virtual ~backend_kernel_launcher(){}
@@ -106,7 +108,7 @@ private:
   backend_kernel_launch_capabilities _capabilities;
 };
 
-class kernel_launcher
+class HIPSYCL_RT_EXPORT kernel_launcher
 {
 public:
   kernel_launcher(

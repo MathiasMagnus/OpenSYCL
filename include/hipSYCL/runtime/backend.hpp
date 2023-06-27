@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_RUNTIME_BACKEND_HPP
 #define HIPSYCL_RUNTIME_BACKEND_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -44,7 +46,7 @@ class backend_allocator;
 class backend_hardware_manager;
 class hw_model;
 
-class backend
+class HIPSYCL_RT_EXPORT backend
 {
 public:
   virtual api_platform get_api_platform() const = 0;
@@ -76,7 +78,7 @@ public:
   create_inorder_executor(device_id dev, int priority) = 0;
 };
 
-class backend_manager
+class HIPSYCL_RT_EXPORT backend_manager
 {
 public:
   using backend_list_type =

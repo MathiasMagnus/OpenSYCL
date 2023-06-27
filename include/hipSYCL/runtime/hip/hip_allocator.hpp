@@ -28,12 +28,14 @@
 #ifndef HIPSYCL_HIP_ALLOCATOR_HPP
 #define HIPSYCL_HIP_ALLOCATOR_HPP
 
+#include <rt-backend-hip_export.h>
+
 #include "../allocator.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-class hip_allocator : public backend_allocator 
+class RT_BACKEND_HIP_EXPORT hip_allocator : public backend_allocator 
 {
 public:
   hip_allocator(backend_descriptor desc, int hip_device);

@@ -29,6 +29,8 @@
 #ifndef HIPSYCL_DAG_DIRECT_SCHEDULER_HPP
 #define HIPSYCL_DAG_DIRECT_SCHEDULER_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "dag_node.hpp"
 #include "operations.hpp"
 
@@ -39,7 +41,7 @@ namespace rt {
 
 class runtime;
 
-class dag_direct_scheduler {
+class HIPSYCL_RT_EXPORT dag_direct_scheduler {
 public:
   dag_direct_scheduler(runtime* rt);
   void submit(dag_node_ptr node);

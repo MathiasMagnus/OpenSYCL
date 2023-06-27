@@ -29,6 +29,8 @@
 #ifndef HIPSYCL_RT_ERROR_HPP
 #define HIPSYCL_RT_ERROR_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <functional>
 #include <ostream>
 #include <string>
@@ -58,7 +60,7 @@ enum class error_type {
   feature_not_supported
 };
 
-class source_location {
+class HIPSYCL_RT_EXPORT source_location {
 public:
   source_location(const std::string &function, const std::string &file,
                   int line)
@@ -79,7 +81,7 @@ private:
   int _line;
 };
 
-class error_code
+class HIPSYCL_RT_EXPORT error_code
 {
 public:
   error_code(int code)
@@ -117,7 +119,7 @@ private:
   int _code;
 };
 
-class error_info {
+class HIPSYCL_RT_EXPORT error_info {
 public:
   using errc_type = class error_code;
 
@@ -141,7 +143,7 @@ private:
   error_type _etype;
 };
 
-class result {
+class HIPSYCL_RT_EXPORT result {
 public:
   // constructs success result
   result() = default;
@@ -187,11 +189,11 @@ inline result make_error(
 }
 
 // Construct an error object and register in the error queue
-result register_error(
+HIPSYCL_RT_EXPORT result register_error(
     const source_location &origin, const error_info &info);
-void register_error(const result& err);
+HIPSYCL_RT_EXPORT void register_error(const result& err);
 
-inline void print_result(const result& res, bool warn_only = false){
+HIPSYCL_RT_EXPORT inline void print_result(const result& res, bool warn_only = false){
 
   std::stringstream sstr;
   res.dump(sstr);

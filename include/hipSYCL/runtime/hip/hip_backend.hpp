@@ -25,6 +25,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef HIPSYCL_HIP_BACKEND_HPP
+#define HIPSYCL_HIP_BACKEND_HPP
+
+#include <rt-backend-hip_export.h>
+
 #include <vector>
 
 #include "../backend.hpp"
@@ -35,14 +40,11 @@
 #include "hip_hardware_manager.hpp"
 #include "hip_event_pool.hpp"
 
-#ifndef HIPSYCL_HIP_BACKEND_HPP
-#define HIPSYCL_HIP_BACKEND_HPP
-
 namespace hipsycl {
 namespace rt {
 
 
-class hip_backend : public backend
+class RT_BACKEND_HIP_EXPORT hip_backend : public backend
 {
 public:
   hip_backend();

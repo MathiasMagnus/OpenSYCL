@@ -28,13 +28,14 @@
 #ifndef HIPSYCL_BACKEND_LOADER_HPP
 #define HIPSYCL_BACKEND_LOADER_HPP
 
+#include <hipsycl-rt_export.h>
 
 #include <string>
 #include <vector>
 #include <utility>
 
 namespace hipsycl::rt {
-class backend;
+class HIPSYCL_RT_EXPORT backend;
 }
 
 #ifndef _WIN32
@@ -49,11 +50,25 @@ hipsycl::rt::backend *hipsycl_backend_plugin_create();
 HIPSYCL_PLUGIN_API_EXPORT
 const char* hipsycl_backend_plugin_get_name();
 
+/*
+#if defined(hipSYCL_rt_EXPORTS)
+#define HIPSYCL_PLUGIN_API_EXPORT extern "C" HIPSYCL_RT_EXPORT
+#elif defined(rt_backend_omp_EXPORTS)
+#define HIPSYCL_PLUGIN_API_EXPORT extern "C" RT_BACKEND_OMP_EXPORT
+#elif defined(rt_backend_hip_EXPORTS)
+#define HIPSYCL_PLUGIN_API_EXPORT extern "C" RT_BACKEND_HIP_EXPORT
+#endif
 
+HIPSYCL_PLUGIN_API_EXPORT
+hipsycl::rt::backend *hipsycl_backend_plugin_create();
+
+HIPSYCL_PLUGIN_API_EXPORT
+const char* hipsycl_backend_plugin_get_name();
+*/
 namespace hipsycl {
 namespace rt {
 
-class backend_loader {
+class HIPSYCL_RT_EXPORT backend_loader {
 public:
   ~backend_loader();
 

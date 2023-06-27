@@ -29,6 +29,8 @@
 #ifndef HIPSYCL_ASYNC_ERRORS_HPP
 #define HIPSYCL_ASYNC_ERRORS_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <mutex>
 #include <vector>
 
@@ -38,7 +40,7 @@
 namespace hipsycl {
 namespace rt {
 
-class async_error_list
+class HIPSYCL_RT_EXPORT async_error_list
 {
 public:
 

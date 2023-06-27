@@ -28,12 +28,14 @@
 #ifndef HIPSYCL_SCHEDULER_HPP
 #define HIPSYCL_SCHEDULER_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "execution_context.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-class scheduler
+class HIPSYCL_RT_EXPORT scheduler
 {
 public:
   backend_queue_manager _queues;

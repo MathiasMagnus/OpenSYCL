@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_EVENT_POOL_HPP
 #define HIPSYCL_EVENT_POOL_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <vector>
 #include <mutex>
 #include "error.hpp"

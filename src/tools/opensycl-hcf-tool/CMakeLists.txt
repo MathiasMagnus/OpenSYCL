@@ -4,5 +4,6 @@ target_include_directories(opensycl-hcf-tool PRIVATE
     ${HIPSYCL_SOURCE_DIR}
     ${HIPSYCL_SOURCE_DIR}/include
     ${PROJECT_BINARY_DIR}/include)
+target_link_libraries(opensycl-hcf-tool PRIVATE hipSYCL-rt)
 
 install(TARGETS opensycl-hcf-tool DESTINATION bin)

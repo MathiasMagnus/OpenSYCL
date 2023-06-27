@@ -28,12 +28,14 @@
 #ifndef HIPSYCL_OMP_HARDWARE_MANAGER_HPP
 #define HIPSYCL_OMP_HARDWARE_MANAGER_HPP
 
+#include <rt-backend-omp_export.h>
+
 #include "../hardware.hpp"
 
 namespace hipsycl {
 namespace rt {
 
-class omp_hardware_context : public hardware_context
+class RT_BACKEND_OMP_EXPORT omp_hardware_context : public hardware_context
 {
 public:
   virtual bool is_cpu() const override;

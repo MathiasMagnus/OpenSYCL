@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_HARDWARE_HPP
 #define HIPSYCL_HARDWARE_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <string>
 
 #include "device_id.hpp"
@@ -116,7 +118,7 @@ enum class device_uint_list_property {
   sub_group_sizes
 };
 
-class hardware_context
+class HIPSYCL_RT_EXPORT hardware_context
 {
 public:
   virtual bool is_cpu() const = 0;
@@ -145,7 +147,7 @@ public:
   virtual ~hardware_context(){}
 };
 
-class backend_hardware_manager
+class HIPSYCL_RT_EXPORT backend_hardware_manager
 {
 public:
   virtual std::size_t get_num_devices() const = 0;

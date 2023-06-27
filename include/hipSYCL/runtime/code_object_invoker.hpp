@@ -29,6 +29,8 @@
 #ifndef HIPSYCL_CODE_OBJECT_INVOKER_HPP
 #define HIPSYCL_CODE_OBJECT_INVOKER_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "error.hpp"
 #include "hipSYCL/glue/kernel_configuration.hpp"
 #include "util.hpp"
@@ -38,7 +40,7 @@
 namespace hipsycl {
 namespace rt {
 
-class multipass_code_object_invoker {
+class HIPSYCL_RT_EXPORT multipass_code_object_invoker {
 public:
   virtual result submit_kernel(const kernel_operation& op,
                                hcf_object_id hcf_object,
@@ -51,7 +53,7 @@ public:
   virtual ~multipass_code_object_invoker(){}
 };
 
-class sscp_code_object_invoker {
+class HIPSYCL_RT_EXPORT sscp_code_object_invoker {
 public:
   virtual result submit_kernel(const kernel_operation& op,
                                hcf_object_id hcf_object,

@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_SIGNAL_CHANNEL_HPP
 #define HIPSYCL_SIGNAL_CHANNEL_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <future>
 #include <chrono>
 
@@ -35,7 +37,7 @@
 namespace hipsycl {
 namespace rt {
 
-class signal_channel {
+class HIPSYCL_RT_EXPORT signal_channel {
 public:
   signal_channel() {
     _shared_future = _promise.get_future().share();

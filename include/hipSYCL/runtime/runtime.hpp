@@ -29,6 +29,8 @@
 #ifndef HIPSYCL_RUNTIME_HPP
 #define HIPSYCL_RUNTIME_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "dag_manager.hpp"
 #include "backend.hpp"
 #include "settings.hpp"
@@ -39,7 +41,7 @@
 namespace hipsycl {
 namespace rt {
 
-class runtime
+class HIPSYCL_RT_EXPORT runtime
 {
 public:
 

@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_DAG_MANAGER_HPP
 #define HIPSYCL_DAG_MANAGER_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <mutex>
 
 #include "dag.hpp"
@@ -41,9 +43,9 @@
 namespace hipsycl {
 namespace rt {
 
-class runtime;
+class HIPSYCL_RT_EXPORT runtime;
 
-class dag_manager
+class HIPSYCL_RT_EXPORT dag_manager
 {
   friend class dag_build_guard;
 public:
@@ -80,7 +82,7 @@ private:
   runtime* _rt;
 };
 
-class dag_build_guard
+class HIPSYCL_RT_EXPORT dag_build_guard
 {
 public:
   dag_build_guard(dag_manager& mgr)

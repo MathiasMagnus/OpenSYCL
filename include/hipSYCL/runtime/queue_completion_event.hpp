@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_QUEUE_COMPLETION_EVENT_HPP
 #define HIPSYCL_QUEUE_COMPLETION_EVENT_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "error.hpp"
 #include "hipSYCL/runtime/event.hpp"
 #include "inorder_queue_event.hpp"

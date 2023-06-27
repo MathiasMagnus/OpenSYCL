@@ -1,3 +1,5 @@
+include(GenerateExportHeader)
+include(GNUInstallDirs)
 find_package(Threads REQUIRED)
 
 set(HIPSYCL_RT_EXTRA_CXX_FLAGS "")
@@ -41,6 +43,8 @@ add_library(hipSYCL-rt SHARED
   hw_model/memcpy.cpp
   serialization/serialization.cpp)
 
+generate_export_header(hipSYCL-rt)
+
 target_compile_options(hipSYCL-rt PRIVATE ${HIPSYCL_RT_EXTRA_CXX_FLAGS})
 target_link_libraries(hipSYCL-rt PRIVATE ${HIPSYCL_RT_EXTRA_LINKER_FLAGS} opensycl-common Threads::Threads)
 
@@ -50,6 +54,7 @@ target_include_directories(hipSYCL-rt
   PUBLIC
     $<BUILD_INTERFACE:${HIPSYCL_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> # export header
   PRIVATE
     ${HIPSYCL_SOURCE_DIR}
     ${PROJECT_BINARY_DIR}/include
@@ -84,7 +89,7 @@ install(TARGETS hipSYCL-rt
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib)
-
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/hipsycl-rt_export.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 if(WITH_CUDA_BACKEND)
   add_library(rt-backend-cuda SHARED
@@ -132,6 +137,9 @@ if(WITH_ROCM_BACKEND)
     hip/hip_backend.cpp
     hip/hip_code_object.cpp)
 
+  generate_export_header(rt-backend-hip)
+  target_include_directories(rt-backend-hip PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+
   target_compile_definitions(rt-backend-hip PRIVATE HIPSYCL_RT_HIP_TARGET_ROCM=1)
   if(ENABLE_ROCM_UNIFIED_MEMORY_API)
     target_compile_definitions(rt-backend-hip PRIVATE HIPSYCL_RT_HIP_SUPPORTS_UNIFIED_MEMORY=1)
@@ -158,6 +166,7 @@ if(WITH_ROCM_BACKEND)
         RUNTIME DESTINATION bin/hipSYCL
         LIBRARY DESTINATION lib/hipSYCL
         ARCHIVE DESTINATION lib/hipSYCL)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rt-backend-hip_export.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
 
 if(WITH_LEVEL_ZERO_BACKEND)
@@ -193,6 +202,9 @@ if(WITH_CPU_BACKEND)
     omp/omp_hardware_manager.cpp
     omp/omp_queue.cpp)
 
+  generate_export_header(rt-backend-omp)
+  target_include_directories(rt-backend-omp PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+
     find_package(OpenMP REQUIRED)
 
     target_include_directories(rt-backend-omp PRIVATE ${HIPSYCL_SOURCE_DIR}/include)
@@ -225,5 +237,6 @@ if(WITH_CPU_BACKEND)
       RUNTIME DESTINATION bin/hipSYCL
       LIBRARY DESTINATION lib/hipSYCL
       ARCHIVE DESTINATION lib/hipSYCL)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rt-backend-omp_export.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
 

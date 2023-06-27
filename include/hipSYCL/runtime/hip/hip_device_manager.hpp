@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_HIP_DEVICE_MANAGER_HPP
 #define HIPSYCL_HIP_DEVICE_MANAGER_HPP
 
+#include <rt-backend-hip_export.h>
+
 namespace hipsycl {
 namespace rt {
 
@@ -35,7 +37,7 @@ namespace rt {
 /// The hip_device_manager acts as a wrapper for this functionality.
 /// It is implemented as a per-thread singleton and assumes that
 /// no external calls to hipSetDevice() are made by the user.
-class hip_device_manager
+class RT_BACKEND_HIP_EXPORT hip_device_manager
 {
 public:
   void activate_device(int device_id);

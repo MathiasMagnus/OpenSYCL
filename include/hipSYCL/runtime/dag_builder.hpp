@@ -28,6 +28,8 @@
 #ifndef HIPSYCL_DAG_BUILDER_HPP
 #define HIPSYCL_DAG_BUILDER_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include "dag.hpp"
 #include "dag_node.hpp"
 #include "operations.hpp"
@@ -39,7 +41,7 @@
 namespace hipsycl {
 namespace rt {
 
-class runtime;
+class HIPSYCL_RT_EXPORT runtime;
 /// Incrementally builds a dag based on operations, taking into
 /// account data dependencies.
 /// The resulting DAG will still contain requirements,
@@ -49,7 +51,7 @@ class runtime;
 /// calculated dependencies may be incorrect!
 ///
 /// Thread safety: Safe
-class dag_builder
+class HIPSYCL_RT_EXPORT dag_builder
 {
 public:
   dag_builder(runtime* rt);

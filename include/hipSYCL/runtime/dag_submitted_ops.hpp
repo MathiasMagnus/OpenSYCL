@@ -29,6 +29,8 @@
 #ifndef HIPSYCL_DAG_SUBMITTED_OPS_HPP
 #define HIPSYCL_DAG_SUBMITTED_OPS_HPP
 
+#include <hipsycl-rt_export.h>
+
 #include <mutex>
 #include <vector>
 
@@ -39,7 +41,7 @@ namespace hipsycl {
 namespace rt {
 
 
-class dag_submitted_ops
+class HIPSYCL_RT_EXPORT dag_submitted_ops
 {
 public:
   // Asynchronously waits on the nodes to complete, and, once complete,
