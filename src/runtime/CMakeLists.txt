@@ -26,6 +26,7 @@ add_library(hipSYCL-rt SHARED
   backend_loader.cpp
   hints.cpp
   device_id.cpp
+  device_list.cpp
   operations.cpp
   data.cpp
   inorder_executor.cpp
