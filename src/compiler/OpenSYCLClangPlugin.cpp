@@ -104,7 +104,7 @@ static llvm::RegisterStandardPasses
 #endif // HIPSYCL_WITH_ACCELERATED_CPU
 #endif // LLVM_VERSION_MAJOR < 16
 
-#if !defined(_WIN32) && LLVM_VERSION_MAJOR >= 11
+#if LLVM_VERSION_MAJOR >= 11
 #define HIPSYCL_RESOLVE_AND_QUOTE(V) #V
 #define HIPSYCL_STRINGIFY(V) HIPSYCL_RESOLVE_AND_QUOTE(V)
 #define HIPSYCL_PLUGIN_VERSION_STRING                                                              \
